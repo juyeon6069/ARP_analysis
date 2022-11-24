@@ -5,6 +5,9 @@
 
 ARP(Address Resolution Protocol) is a mechanism to match Mac(media access control) address in the physical layer(L2) and IP(Internet protocol) address the logical layer(L3). This is used to find the MAC address of other person for data communication.
 
+![Lab3_arp_packet](https://user-images.githubusercontent.com/97582404/203704065-185786a8-1981-4301-bab6-42910ba0bfa4.png)
+<Internet Protocol (IPv4) over Ethernet ARP packet - source from https://en.wikipedia.org/wiki/Address_Resolution_Protocol>
+
 This code contains data based on packets information shown in the WireShark. It has information about Hardware Type, Protocol Type, Hardware Size, Protocol Size, Sender Mac address, Sender IP address, Target Mac address, Target IP address, wheter it is ARP request or reply, and whether it is gratuitous ARP or not. 
 Because it is allocate on the Ethernet, therefore, it has 1 as a Hardware type. Next, for the protocol type, it should have ARP value since only ARP packet is captured. It can be also said it iv IPv4(Internet Protocol version 4) type, because it has IP address of the form of IPv4. Its hardware and protocol size is 6 and 4, respectively. These size is determind as the length of the physical address and IP address in byte, and it can be got using dpkt.arp module, hln for hardware size and pln for protocol size 
 
