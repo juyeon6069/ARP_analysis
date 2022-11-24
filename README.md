@@ -8,6 +8,7 @@ ARP(Address Resolution Protocol) is a mechanism to match Mac(media access contro
 
 ![Lab3_arp_packet](https://user-images.githubusercontent.com/97582404/203704065-185786a8-1981-4301-bab6-42910ba0bfa4.png)
 
+# Code_Analysis
 <Internet Protocol (IPv4) over Ethernet ARP packet - source from https://en.wikipedia.org/wiki/Address_Resolution_Protocol>
 
 This code contains data based on packets information shown in the WireShark. It has information about Hardware Type, Protocol Type, Hardware Size, Protocol Size, Sender Mac address, Sender IP address, Target Mac address, Target IP address, wheter it is ARP request or reply, and whether it is gratuitous ARP or not. 
@@ -20,7 +21,7 @@ First, to pick only ARP packet, packet's ethernet frame (ethernet.Ethernet(packe
 And then, in dpkt.arp module, using op(operation value) to determine whether arp packet is ARP Request or ARP Reply. If the value is 1, it means ARP Request. And the value is 2, it means ARP Reply. For the ARP request, it has Gratuitous value, therefore to distinguish with the real request signal, put checking the Target Mac adress is broadcast address, ff:ff:ff:ff:ff:ff or not. 
 
 
-# Determine Mac address and IP address
+# Determine_Mac_address_and_IP_address
 
 ![Lab3_ScreenCapture](https://user-images.githubusercontent.com/97582404/203699348-31a62462-72db-44d3-a3a1-1d6616d5a4fb.png)
 
