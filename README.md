@@ -15,12 +15,17 @@ ARP(Address Resolution Protocol) is a mechanism to match Mac(media access contro
 
 This code contains data based on packets information shown in the WireShark. It has information about Hardware Type, Protocol Type, Hardware Size, Protocol Size, Sender Mac address, Sender IP address, Target Mac address, Target IP address, wheter it is ARP request or reply, and whether it is gratuitous ARP or not. 
 
-Because it is allocate on the Ethernet, therefore, it has 1 as a Hardware type. Next, for the protocol type, it should have ARP value since only ARP packet is captured. It can be also said it iv IPv4(Internet Protocol version 4) type, because it has IP address of the form of IPv4. Its hardware and protocol size is 6 and 4, respectively. These size is determind as the length of the physical address and IP address in byte, and it can be got using dpkt.arp module, hln for hardware size and pln for protocol size 
+First, to pick only ARP packet, packet's ethernet frame (ethernet.Ethernet(packet[1])) should be 0x0806 which is Ethernet frame field. But it is already filtered during capturing on the WireShark, so in this code, did not filter it. 
 
 
-First, to pick only ARP packet, packet's ethernet frame (ethernet.Ethernet(packet[1])) should be 0x0806 which is Ethernet frame field. But it is already filtered during captureing on the WireShark. Therefore, in this code, do not have to filter it. 
+Because it is allocate on the Ethernet, therefore, it has 1 as a Hardware type. Using .hrd in dpkt.arp module, Hardware type will be found. Next, for the protocol type, it should have ARP value since only ARP packet is captured. It can be also said it iv IPv4(Internet Protocol version 4) type, because it has IP address of the form of IPv4. Its hardware and protocol size is 6 and 4, respectively. These size is determind as the length of the physical address and IP address in byte, and it can be got using dpkt.arp module, hln for hardware size and pln for protocol size 
 
-And then, in dpkt.arp module, using op(operation value) to determine whether arp packet is ARP Request or ARP Reply. If the value is 1, it means ARP Request. And the value is 2, it means ARP Reply. For the ARP request, it has Gratuitous value, therefore to distinguish with the real request signal, put checking the Target Mac adress is broadcast address, ff:ff:ff:ff:ff:ff or not. 
+
+And then, in dpkt.arp module, using op(operation value) to determine whether arp packet is ARP Request or ARP Reply. If the value is 1, it means ARP Request. And the value is 2, it means ARP Reply. For the ARP request, it has Gratuitous value, therefore to distinguish whether request signal is it or not, put checking the Target Mac adress is broadcast address, ff:ff:ff:ff:ff:ff.  
+
+To find Senders' and Targets' Mac address, also dpkt.arp module, .sha, is used. However, it is not form of hexidecimal, hex() function should be used together. When this is converted it does not have '::', therefore, using for loop to put '::' by 2 digits. 
+
+To find Senders' and Targets' IP address, also dpkt.arp module, .spa, is used.
 
 
 # Determine_Mac_address_and_IP_address
