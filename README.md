@@ -25,7 +25,7 @@ And then, in dpkt.arp module, using op(operation value) to determine whether arp
 
 To find Senders' and Targets' Mac address, also dpkt.arp module, .sha, is used. However, it is not form of hexidecimal, hex() function should be used together. When this is converted it does not have '::', therefore, using for loop to put '::' by 2 digits. 
 
-To find Senders' and Targets' IP address, also dpkt.arp module, .spa, is used.
+To find Senders' and Targets' IP address, also dpkt.arp module, .spa, is used. However, it is also form of the 32-bit packet format, therefore to convert it use inet_ntoa in socket module.
 
 
 # Determine_Mac_address_and_IP_address
